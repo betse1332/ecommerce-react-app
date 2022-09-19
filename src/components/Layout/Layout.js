@@ -4,11 +4,18 @@ import { GET_CATEGORIES } from "../Category";
 import { Query } from "react-apollo";
 import ProgressIndicator from "../ProgressIndicator";
 import ErrorMessage from "../Error";
+import "./Layout.style.css";
+import { logoTransparent } from "../../assets";
 class Layout extends Component {
   render() {
+    const { handleClick } = this.props;
+
     const style = ({ isActive }) => ({
-      fontWeight: isActive ? "bold" : "normal",
-      padding: "10px",
+      color: isActive ? "#5ECE7B" : "black",
+
+      fontWeight: isActive ? "bold" : "300",
+      // padding: "10px",
+      textDecorationLine: isActive ? "underline" : "none",
     });
     return (
       <Query query={GET_CATEGORIES}>
@@ -19,16 +26,26 @@ class Layout extends Component {
           if (error) {
             return <ErrorMessage errorMessage={error.message} />;
           }
-          console.log(data.categories);
+          // console.log(data.categories);
           return (
             <div>
-              <nav className="layout--nav">
-                {data.categories.map((category) => (
-                  <NavLink key={category.name} to={category.name} style={style}>
-                    {category.name.toUpperCase()}
-                  </NavLink>
-                ))}
-              </nav>
+              <div className="layout--header">
+                <nav className="layout--nav">
+                  {data.categories.map((category) => (
+                    <NavLink
+                      key={category.name}
+                      to={category.name}
+                      style={style}
+                      className="layout--navlink"
+                      onClick={() => handleClick(category.name)}
+                    >
+                      {category.name.toUpperCase()}
+                    </NavLink>
+                  ))}
+                </nav>
+                <img className="layout--logo" src={logoTransparent} alt="" />
+              </div>
+
               <main>
                 <Outlet />
               </main>

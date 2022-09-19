@@ -1,0 +1,25 @@
+.product {
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem;
+  /* border: 1px solid black; */
+  /* margin: 0 ; */
+}
+
+.product--img {
+  width: 354px;
+  height: 330px;
+  margin-bottom: 0.7rem;
+  object-fit: contain;
+}
+.product--name {
+  font-size: 18;
+  font-weight: 300;
+
+  color: "#1D1F22";
+  margin-bottom: 0;
+}
+.product--price {
+  margin-top: 0.4rem;
+  font-size: 18;
+  font-weight: 400;
+}

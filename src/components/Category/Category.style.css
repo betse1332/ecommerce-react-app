@@ -1,0 +1,14 @@
+.category--name{
+
+    font-size: 42px;
+    font-weight: 400;
+}
+.category--products{
+    margin: 5rem 0;
+    display: flex;
+    flex: auto;
+    gap: 80px;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    
+}

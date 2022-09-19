@@ -1,0 +1,24 @@
+.layout--nav {
+  padding: 1rem 0;
+  /* border: 1px solid black; */
+  flex: .5;
+}
+
+.layout--navlink {
+
+  text-underline-offset: 2rem;
+  display: inline-block;
+  text-decoration-thickness: .1rem;
+  
+  /* margin-right: 1rem; */
+  padding: 1rem;
+  
+  font-size: 16px;
+}
+.layout--header{
+  display: flex;
+  /* justify-content: space-between; */
+}
+.layout--logo{
+  object-fit: contain;
+}

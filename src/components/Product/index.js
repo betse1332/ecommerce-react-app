@@ -1,4 +1,4 @@
-import Profile from "./Product";
 
+import Product from "./Product";
 
-export default Profile
+export default Product
