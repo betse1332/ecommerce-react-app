@@ -7,11 +7,12 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from './apollo_config';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <ApolloProvider client={apolloClient}>
-            <App />
+           <App/>
     </ApolloProvider>
 
   </Router>

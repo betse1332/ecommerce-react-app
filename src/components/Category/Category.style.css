@@ -1,3 +1,7 @@
+.category{
+    margin-top: 4rem;
+    /* border: 1px solid; */
+}
 .category--name{
 
     font-size: 42px;
@@ -9,6 +13,6 @@
     flex: auto;
     gap: 80px;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    /* justify-content: space-around   ; */
     
 }

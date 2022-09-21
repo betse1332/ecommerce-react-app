@@ -1,15 +1,26 @@
 import React, { Component } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { GET_CATEGORIES } from "../Category";
 import { Query } from "react-apollo";
+import PropTypes from 'prop-types'
 import ProgressIndicator from "../ProgressIndicator";
 import ErrorMessage from "../Error";
+import DropDown from "../DropDown";
+import { emptyCart, logoTransparent } from "../../assets";
+import { GET_CATEGORYNAME_AND_CURRENCY } from "./queries";
 import "./Layout.style.css";
-import { logoTransparent } from "../../assets";
-class Layout extends Component {
-  render() {
-    const { handleClick } = this.props;
+import CartModal from "../Cart/CartOverlay";
+import LayoutActions from "./LayoutActions";
 
+class Layout extends Component {
+ 
+
+  render() {
+    const { handleTabChange, currencyType, handleSelectorChange } = this.props;
+      // handleSelectorChange("$")
+    console.log(
+      "🚀 ~ file: Layout.js ~ line 20 ~ Layout ~ render ~ currencyType",
+      currencyType
+    );
     const style = ({ isActive }) => ({
       color: isActive ? "#5ECE7B" : "black",
 
@@ -17,8 +28,9 @@ class Layout extends Component {
       // padding: "10px",
       textDecorationLine: isActive ? "underline" : "none",
     });
+
     return (
-      <Query query={GET_CATEGORIES}>
+      <Query query={GET_CATEGORYNAME_AND_CURRENCY}>
         {({ data, loading, error }) => {
           if (loading) {
             return <ProgressIndicator />;
@@ -26,7 +38,12 @@ class Layout extends Component {
           if (error) {
             return <ErrorMessage errorMessage={error.message} />;
           }
-          // console.log(data.categories);
+          // console.log(data.currencies);
+          console.log(
+            "🚀 ~ file: Layout.js ~ line 42 ~ Layout ~ render ~ currencies",
+            data.currencies
+          );
+
           return (
             <div>
               <div className="layout--header">
@@ -37,13 +54,15 @@ class Layout extends Component {
                       to={category.name}
                       style={style}
                       className="layout--navlink"
-                      onClick={() => handleClick(category.name)}
+                      onClick={() => handleTabChange(category.name)}
                     >
                       {category.name.toUpperCase()}
                     </NavLink>
                   ))}
                 </nav>
                 <img className="layout--logo" src={logoTransparent} alt="" />
+                <LayoutActions currencies={data.currencies} title={currencyType} handleSelector={handleSelectorChange}/>
+               
               </div>
 
               <main>
@@ -55,6 +74,12 @@ class Layout extends Component {
       </Query>
     );
   }
+}
+
+Layout.prototypes={
+  handleTabChange:PropTypes.func.isRequired,
+  handleSelectorChange:PropTypes.func.isRequired,
+  currencies:PropTypes.string.isRequired
 }
 
 export default Layout;

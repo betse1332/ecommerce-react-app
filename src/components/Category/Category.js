@@ -7,8 +7,9 @@ import { GET_PRODUCTS_FROM_CATEGORY } from "./queries";
 import './Category.style.css'
 
 const filterCategoryProductPrice = (prices, currencyType) => {
+  console.log(currencyType)
   const currency = prices.filter(
-    (price) => price.currency.label === currencyType
+    (price) => price.currency.symbol === currencyType
   );
    
   return currency[0];

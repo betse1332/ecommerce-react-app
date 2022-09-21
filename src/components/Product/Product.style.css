@@ -1,15 +1,19 @@
 .product {
   background-color: rgb(255, 255, 255);
-  padding: 0.5rem;
+  padding: 0.8rem;
   /* border: 1px solid black; */
   /* margin: 0 ; */
 }
-
+.product:hover{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: .5rem;
+}
 .product--img {
   width: 354px;
   height: 330px;
   margin-bottom: 0.7rem;
   object-fit: contain;
+  /* border: 1px solid; */
 }
 .product--name {
   font-size: 18;
@@ -22,4 +26,10 @@
   margin-top: 0.4rem;
   font-size: 18;
   font-weight: 400;
+}
+.product--cart{
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin:-3.1rem 0 0 17.4rem;
 }

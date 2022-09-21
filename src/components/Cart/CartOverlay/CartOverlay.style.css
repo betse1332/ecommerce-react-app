@@ -1,0 +1,32 @@
+.cartmodal{
+    position: fixed;
+    left: 0;
+    top: 5.1rem;
+    bottom: 0;
+    right: 0;
+    background-color: rgb(0, 0, 0,0.5);
+    border: 1px solid;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-right:5rem ;
+    
+
+}
+.cartmodal--content{
+    
+    width: 20rem;
+    background-color: white;
+    
+}
+.cartmodal--header,.cartmodal--footer{
+    padding: 10px;
+}
+.cartmodal--title{
+    margin: 0;
+}
+.cartmodal--body{
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}

@@ -4,16 +4,26 @@ import { Route, Routes } from "react-router-dom";
 import Category from "../Category";
 import Cart from "../Cart";
 import Product from "../Product";
-import './App.style.css'
+import "./App.style.css";
 class App extends Component {
   state = {
-    currencyType: "USD",
+    currencyType: "$",
     categoryName: "all",
+    
   };
 
-  handleClick = (categoryName) => {
+
+
+  handleTabChange = (categoryName) => {
     this.setState({
       categoryName: categoryName,
+    });
+  };
+  handleSelectorChange = (currency) => {
+    console.log("🚀 ~ file: App.js ~ line 22 ~ App ~ currency", currency);
+
+    this.setState({
+      currencyType: currency,
     });
   };
 
@@ -22,7 +32,15 @@ class App extends Component {
     return (
       <div className="app">
         <Routes>
-          <Route element={<Layout handleClick={this.handleClick} />}>
+          <Route
+            element={
+              <Layout
+                handleTabChange={this.handleTabChange}
+                handleSelectorChange={this.handleSelectorChange}
+                currencyType={this.state.currencyType}
+              />
+            }
+          >
             <Route
               index
               element={
