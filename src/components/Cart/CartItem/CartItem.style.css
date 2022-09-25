@@ -1,0 +1,80 @@
+.cartitem {
+  display: flex;
+ font-family: "Raleway";
+  /* border: 1px solid; */
+  padding-bottom: .5rem;
+  margin-bottom: 1.5rem;
+}
+.cartitem--sizelist {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: .3rem;
+  
+}
+.cartitem--colorlist {
+  display: flex;
+  gap: 0.5rem;
+}
+.cartitem--name{
+    line-height: 1.5;
+    
+    font-family: 'Raleway';
+    font-weight: 300;
+}
+.cartitem--price{
+    font-weight: 500;
+}
+.cartitem--img {
+  flex: 3;
+ 
+}
+.cartitem--details {
+  flex: 3;
+
+}
+.title{
+    /* border: 1px solid; */
+    padding: 0;
+    margin: .5rem 0;
+    font-weight: 300;
+}
+
+.cartitem--counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* margin: 0.9rem 0; */
+  align-items: center;
+  flex: 1.5;
+
+  font-family: "Railway";
+  font-size: 12px;
+}
+.counter--sign {
+  border: 1px solid;
+  text-align: center;
+  text-align: center;
+  padding: 0.5rem 0.7rem;
+  margin-top: .5rem;
+}
+.minus--icon{
+  margin-bottom: .2rem;
+
+}
+.cartitem--img{
+  
+    display: flex;
+    justify-content: center;
+}
+.cart--img{
+    
+    width: 100%;
+    text-align: center;
+   
+    object-fit: contain;
+}
+.item--counter{
+  font-family: 'Raleway';
+  font-size: 18px;
+  font-weight: 400;
+}

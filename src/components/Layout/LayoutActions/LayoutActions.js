@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { arrowDown, arrowUp, emptyCart } from "../../../assets";
 import "./LayoutActions.style.css";
-import CartModal from "../../Cart/CartOverlay";
+import CartOverlay from "../../Cart/CartOverlay";
 class LayoutActions extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +39,19 @@ class LayoutActions extends Component {
   };
 
   render() {
-    const { currencies } = this.props;
+    const {
+      currencies,
+      cartItems,
+      currencyType,
+      cartItemCount,
+      removeItemFromTheCart,
+      addItemToTheCart,
+    } = this.props;
+    console.log(
+      "🚀 ~ file: LayoutActions.js ~ line 43 ~ LayoutActions ~ render ~ cartItems",
+      cartItems
+    );
+
     const { isDropDownOpen, headerTitle, isCartModalOpened } = this.state;
     return (
       <div className="layout--actions">
@@ -77,11 +89,24 @@ class LayoutActions extends Component {
               </div>
             )}
           </div>
-          <div className="cart--icon" onClick={this.toggleCartModal}>
-            <img src={emptyCart} alt="empty-cart"  />
+          <div className="cart--base" onClick={this.toggleCartModal}>
+            {cartItemCount > 0 && (
+              <div className="cart--indicator">
+                <div className="notification--count">{cartItemCount}</div>
+              </div>
+            )}
           </div>
         </div>
-        {isCartModalOpened && <CartModal />}
+        {isCartModalOpened && (
+          <CartOverlay
+            cartItems={cartItems}
+            currencyType={currencyType}
+            removeItemFromTheCart={removeItemFromTheCart}
+            addItemToTheCart={addItemToTheCart}
+            cartItemCount={cartItemCount}
+            
+          />
+        )}
       </div>
     );
   }
@@ -95,5 +120,9 @@ LayoutActions.prototypes = {
     })
   ),
   handleSelector: PropTypes.func.isRequired,
+  cartItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cartItemCount: PropTypes.number.isRequired,
+  removeItemFromTheCart: PropTypes.func.isRequired,
+  addItemToTheCart:PropTypes.func.isRequired
 };
 export default LayoutActions;

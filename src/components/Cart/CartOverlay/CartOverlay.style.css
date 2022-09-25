@@ -17,6 +17,7 @@
     
     width: 20rem;
     background-color: white;
+    padding: .2rem;
     
 }
 .cartmodal--header,.cartmodal--footer{
@@ -24,6 +25,7 @@
 }
 .cartmodal--title{
     margin: 0;
+    
 }
 .cartmodal--body{
     padding: 10px;

@@ -1,0 +1,15 @@
+.product--attribute{
+    border: 1px solid black;
+    min-width: 20%;
+
+    text-align:center
+    
+}
+.product--attribute:hover{
+    background-color: black;
+    color: white;
+}
+.attribute--component{
+    margin: 0;
+    padding:0.2rem
+}

@@ -1,0 +1,151 @@
+import React, { Component } from "react";
+import { logoTransparent, minus } from "../../../assets";
+import { filterProductPrice } from "../../helper-functions";
+import ProductAttributeBox from "../../Product/ProductAttributeBox";
+import ProductColorBox from "../../Product/ProductColorBox";
+
+import "./CartItem.style.css";
+class CartItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemCounter: 1,
+      selectedColor: "",
+    };
+  }
+
+  incrementItem = () => {
+    const { addItemToTheCart, id } = this.props;
+
+    this.setState(
+      (prevState) => ({
+        itemCounter: prevState.itemCounter + 1,
+      }),
+      () => addItemToTheCart({ id: id })
+    );
+  };
+
+  decrementItem = () => {
+    const { removeItemFromTheCart, id } = this.props;
+    console.log(
+      "🚀 ~ file: CartItem.js ~ line 29 ~ CartItem ~ this.setState ~ itemCounter",
+      this.state.itemCounter
+    );
+    this.setState(
+      (prevState) => ({
+        itemCounter: prevState.itemCounter > 0 ? prevState.itemCounter - 1 : 0,
+      }),
+      () => removeItemFromTheCart({ counter: this.state.itemCounter, id: id })
+    );
+    console.log(
+      "🚀 ~ file: CartItem.js ~ line 31 ~ CartItem ~ this.setState ~ itemCounter",
+      this.state.itemCounter
+    );
+    // removeItemFromTheCart({ counter: this.state.itemCounter, id: id });
+  };
+
+  render() {
+    const { itemCounter } = this.state;
+    const { brand, name, prices, gallery, attributes, currencyType } =
+      this.props;
+    const price = filterProductPrice(prices, currencyType);
+
+    return (
+      <div className="cartitem">
+        <div className="cartitem--details">
+          <p className="cartitem--name">
+            {name} {brand}
+          </p>
+          <p className="cartitem--price">
+            {price.currency.symbol} {price.amount}
+          </p>
+
+          {attributes.map((attribute) => {
+            console.log(
+              "🚀 ~ file: CartItem.js ~ line 96 ~ CartItem ~ {attributes.map ~ attribute",
+              attribute.id !== "Color"
+            );
+
+            {
+              return attribute.id !== "Color" ? (
+                <div className="cartitem--size" key={attribute.id}>
+                  <p className="title">{attribute.name} :</p>
+                  <div className="cartitem--sizelist">
+                    {attribute.items.map((item) => {
+                      if (attribute.items.indexOf(item) == 0)
+                        return (
+                          <ProductAttributeBox
+                            attribute={item.value}
+                            key={item.id}
+                            isSelected={true}
+                      
+                            incrementItem={this.incrementItem}
+                            decrementItem={this.decrementItem}
+                          />
+                        );
+                      return (
+                        <ProductAttributeBox
+                          attribute={item.value}
+                          key={item.id}
+                          isSelected={false}
+                 
+                          incrementItem={this.incrementItem}
+                          decrementItem={this.decrementItem}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="cartitem--color" key={attribute.id}>
+                  <p className="title">{attribute.name}:</p>
+                  <div className="cartitem--colorlist">
+                    {attribute.items.map((item) => {
+                      if (attribute.items.indexOf(item) == 0)
+                        return (
+                          <ProductColorBox
+                            colorCode={item.value}
+                            key={item.id}
+                            isSelected={true}
+                 
+                            incrementItem={this.incrementItem}
+                            decrementItem={this.decrementItem}
+                          />
+                        );
+                      return (
+                        <ProductColorBox
+                          colorCode={item.value}
+                          key={item.id}
+                          isSelected={false}
+                          
+                          incrementItem={this.incrementItem}
+                          decrementItem={this.decrementItem}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
+          })}
+        </div>
+        <div className="cartitem--counter">
+          <div className="counter--sign" onClick={this.incrementItem}>
+            +
+          </div>
+          <p className="item--counter">{itemCounter}</p>
+          <div className="counter--sign" onClick={this.decrementItem}>
+            <img src={minus} alt="" className="minus--icon" />
+          </div>
+        </div>
+
+        <div className="cartitem--img">
+          <img src={gallery[0]} alt="cart item" className="cart--img" />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default CartItem;

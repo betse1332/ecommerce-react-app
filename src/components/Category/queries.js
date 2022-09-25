@@ -20,6 +20,7 @@ export const GET_PRODUCTS_FROM_CATEGORY = gql`
             symbol
           }
         }
+        
         gallery
         name
       }

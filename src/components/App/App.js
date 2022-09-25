@@ -2,18 +2,48 @@ import React, { Component } from "react";
 import Layout from "../Layout";
 import { Route, Routes } from "react-router-dom";
 import Category from "../Category";
-import Cart from "../Cart";
-import Product from "../Product";
+
 import "./App.style.css";
 class App extends Component {
   state = {
     currencyType: "$",
     categoryName: "all",
-    
+    cartItems: [],
+    cartItemCount: 0,
   };
 
+  addItemToTheCart = (product) => {
+    const itemExist = this.state.cartItems.filter(
+      (item) => product.id === item.id
+    ).length;
 
+    itemExist
+      ? this.setState((prevState) => ({
+          cartItemCount: prevState.cartItemCount + 1,
+        }))
+      : this.setState((prevstate) => ({
+          cartItemCount: prevstate.cartItemCount + 1,
+          cartItems: [...prevstate.cartItems, product],
+        }));
+  };
 
+  removeItemFromTheCart = (product) => {
+    const { cartItems } = this.state;
+
+    const { counter, id } = product;
+    const newCartItems = cartItems.filter((item) => item.id !== id);
+    console.log("🚀 ~ file: App.js ~ line 35 ~ App ~ length", counter);
+    counter == 0
+      ? this.setState((prevState) => ({
+          cartItems: newCartItems,
+          cartItemCount: prevState.cartItemCount - 1,
+        }))
+      : this.setState((prevState) => ({
+          cartItemCount: prevState.cartItemCount - 1,
+        }));
+
+    console.log(this.state.cartItems.length);
+  };
   handleTabChange = (categoryName) => {
     this.setState({
       categoryName: categoryName,
@@ -28,7 +58,12 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currencyType);
+    const { cartItems, currencyType, cartItemCount } = this.state;
+    console.log(
+      "🚀 ~ file: App.js ~ line 38 ~ App ~ render ~ cartItems",
+      cartItems
+    );
+
     return (
       <div className="app">
         <Routes>
@@ -37,7 +72,11 @@ class App extends Component {
               <Layout
                 handleTabChange={this.handleTabChange}
                 handleSelectorChange={this.handleSelectorChange}
-                currencyType={this.state.currencyType}
+                currencyType={currencyType}
+                cartItems={cartItems}
+                cartItemCount={cartItemCount}
+                removeItemFromTheCart={this.removeItemFromTheCart}
+                addItemToTheCart={this.addItemToTheCart}
               />
             }
           >
@@ -47,6 +86,7 @@ class App extends Component {
                 <Category
                   currencyType={this.state.currencyType}
                   categoryName={this.state.categoryName}
+                  handleAddItemToCart={this.addItemToTheCart}
                 />
               }
             />
@@ -56,6 +96,7 @@ class App extends Component {
                 <Category
                   categoryName={this.state.categoryName}
                   currencyType={this.state.currencyType}
+                  handleAddItemToCart={this.addItemToTheCart}
                 />
               }
             />
@@ -65,6 +106,7 @@ class App extends Component {
                 <Category
                   categoryName={this.state.categoryName}
                   currencyType={this.state.currencyType}
+                  handleAddItemToCart={this.addItemToTheCart}
                 />
               }
             />
@@ -74,6 +116,7 @@ class App extends Component {
                 <Category
                   categoryName={this.state.categoryName}
                   currencyType={this.state.currencyType}
+                  handleAddItemToCart={this.addItemToTheCart}
                 />
               }
             />

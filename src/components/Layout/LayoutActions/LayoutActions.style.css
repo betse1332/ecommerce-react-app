@@ -13,6 +13,43 @@
   
   margin-top: .3rem;
 }
+.cart--base{
+  align-self: center;
+  margin-right: 0.6rem;
+  
+  margin-top: .3rem;
+  height: 20px;
+  width: 20px;
+  /* border:1px solid  transparent; */
+  /* border-radius: 50%; */
+  background-image: url('../../../assets/empty-cart.png');
+  background-size: cover;
+  background-position: left;
+  position: relative;  
+}
+.cart--indicator{
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  top:-45%;
+  right: 0%;
+  left: 60%;
+  bottom: 60%;
+  background-color: black;
+  border: 3px solid rgb(51, 51, 51);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+.notification--count{
+  font-family: 'Raleway';
+  color: white;
+  font-weight: 500;
+}
+
 
 .action--items {
   display: flex;

@@ -4,23 +4,13 @@ import ErrorMessage from "../Error";
 import Product from "../Product";
 import ProgressIndicator from "../ProgressIndicator";
 import { GET_PRODUCTS_FROM_CATEGORY } from "./queries";
-import './Category.style.css'
-
-const filterCategoryProductPrice = (prices, currencyType) => {
-  console.log(currencyType)
-  const currency = prices.filter(
-    (price) => price.currency.symbol === currencyType
-  );
-   
-  return currency[0];
-};
-
-
+import "./Category.style.css";
+import { filterProductPrice } from "../helper-functions";
 
 class Category extends Component {
   render() {
-    const { categoryName, currencyType } = this.props;
-    
+    const { categoryName, currencyType, handleAddItemToCart } = this.props;
+
     return (
       <div className="category">
         <h1 className="category--name">
@@ -44,9 +34,11 @@ class Category extends Component {
                   return (
                     <Product
                       key={product.id}
+                      id={product.id}
                       coverImage={product.gallery[0]}
                       productName={product.name}
-                      productPrice={filterCategoryProductPrice(
+                      handleAddItemToCart={handleAddItemToCart}
+                      productPrice={filterProductPrice(
                         product.prices,
                         currencyType
                       )}
