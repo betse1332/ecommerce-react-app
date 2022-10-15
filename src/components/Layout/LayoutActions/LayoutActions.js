@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { arrowDown, arrowUp, emptyCart } from "../../../assets";
 import "./LayoutActions.style.css";
 import CartOverlay from "../../Cart/CartOverlay";
+import { filterProductPrice } from "../../helper-functions";
 class LayoutActions extends Component {
   constructor(props) {
     super(props);
@@ -12,8 +13,28 @@ class LayoutActions extends Component {
       headerTitle: this.props.title,
       selectedItem: {},
       isCartModalOpened: false,
+      
     };
   }
+
+  // updateTotalPrice = (priceUpdate) => {
+  //   const { currencyType } = this.props;
+  //   const { productPrices, actionType } = priceUpdate;
+  //   const price = filterProductPrice(productPrices, currencyType);
+  //   this.setState((prevState) => ({
+  //     totalPrice:
+  //       actionType === "INCREMENT"
+  //         ? prevState.totalPrice + price
+  //         : prevState.totalPrice - price,
+  //   }));
+
+  //   console.log(
+  //     "🚀 ~ file: LayoutActions.js ~ line 25 ~ LayoutActions ~ this.setState ~ totalPrice",
+  //     this.state.totalPrice
+  //   );
+  // };
+
+
   toggleCartModal = () => {
     this.setState((prevstate) => ({
       isCartModalOpened: !prevstate.isCartModalOpened,
@@ -46,13 +67,20 @@ class LayoutActions extends Component {
       cartItemCount,
       removeItemFromTheCart,
       addItemToTheCart,
+      totalPrice
     } = this.props;
     console.log(
       "🚀 ~ file: LayoutActions.js ~ line 43 ~ LayoutActions ~ render ~ cartItems",
       cartItems
     );
 
-    const { isDropDownOpen, headerTitle, isCartModalOpened } = this.state;
+    const {
+      isDropDownOpen,
+      headerTitle,
+      isCartModalOpened,
+     
+      
+    } = this.state;
     return (
       <div className="layout--actions">
         <div className="action--items">
@@ -104,7 +132,8 @@ class LayoutActions extends Component {
             removeItemFromTheCart={removeItemFromTheCart}
             addItemToTheCart={addItemToTheCart}
             cartItemCount={cartItemCount}
-            
+           
+            totalPrice={totalPrice}
           />
         )}
       </div>
@@ -123,6 +152,6 @@ LayoutActions.prototypes = {
   cartItems: PropTypes.arrayOf(PropTypes.string).isRequired,
   cartItemCount: PropTypes.number.isRequired,
   removeItemFromTheCart: PropTypes.func.isRequired,
-  addItemToTheCart:PropTypes.func.isRequired
+  addItemToTheCart: PropTypes.func.isRequired,
 };
 export default LayoutActions;

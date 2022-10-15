@@ -2,7 +2,22 @@ import React, { Component } from "react";
 import CartItem from "../CartItem";
 import "./CartOverlay.style.css";
 import PropTypes from "prop-types";
+import { Link, Outlet} from "react-router-dom";
 class CartOverlay extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      totalPrice: 0,
+    };
+  }
+
+  updateTotalPrice = (price) => {
+    this.setState((prevState) => ({
+      totalPrice: prevState.totalPrice + price,
+    }));
+  };
+
   render() {
     const {
       cartItems,
@@ -10,13 +25,15 @@ class CartOverlay extends Component {
       removeItemFromTheCart,
       addItemToTheCart,
       cartItemCount,
+
+      
     } = this.props;
 
     return (
-      <div className="cartmodal">
-        <div className="cartmodal--content">
-          <div className="cartmodal--header">
-            <h4 className="cartmodal--title">
+      <div className="cartoverlay">
+        <div className="cartoverlay--content">
+          <div className="cartoverlay--header">
+            <h4 className="cartoverlay--title">
               {cartItemCount > 0 ? (
                 <p>
                   My bag :
@@ -30,17 +47,42 @@ class CartOverlay extends Component {
               )}
             </h4>
           </div>
-          <div className="cartmodal--body">
-            {cartItems.map((item) => (
-              <CartItem
-                {...item}
-                currencyType={currencyType}
-                key={item.id}
-                removeItemFromTheCart={removeItemFromTheCart}
-                addItemToTheCart={addItemToTheCart}
-              />
-            ))}
-            <button type="">close</button>
+          <div className="cartoverlay--body">
+            {cartItems.map((item) => {
+              
+              return (
+                <CartItem
+                  {...item}
+                  currencyType={currencyType}
+                  key={item.id}
+                  removeItemFromTheCart={removeItemFromTheCart}
+                  addItemToTheCart={addItemToTheCart}
+                  updateTotalPrice={this.updateTotalPrice}
+                />
+              );
+            })}
+          </div>
+
+          <div className="cartoverlay--footer">
+            {cartItemCount > 0 ? (
+              <div>
+                <div className="cart--totalprice">
+                  <h4>Total</h4>
+                  <h4>
+                    {currencyType}
+                    {this.state.totalPrice}
+                  </h4>
+                </div>
+                <div className="footer--actions">
+                  <Link className="actions--viewbag" to="cart"><p>VIEW BAG</p></Link>
+                  <button className="actions--checkout">CHECK OUT</button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <button className="action--close">CLOSE</button>{" "}
+              </div>
+            )}
           </div>
         </div>
       </div>

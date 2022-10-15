@@ -6,7 +6,11 @@ class Cart extends Component{
         return(
             <div className="cart">
                 <h2>Cart page here</h2>
+
+                
             </div>
+
+            
         )
     }
 }

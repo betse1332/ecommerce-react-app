@@ -13,7 +13,7 @@ class Product extends Component {
       isHovering: false,
     };
   }
-
+  
   handleMouseHovering = () => {
     this.setState((prevState) => ({
       isHovering: !prevState.isHovering,

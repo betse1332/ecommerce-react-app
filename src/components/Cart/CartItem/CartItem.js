@@ -14,41 +14,58 @@ class CartItem extends Component {
       selectedColor: "",
     };
   }
+  componentDidMount = () => {
+    const { prices, updateTotalPrice, currencyType } = this.props;
+
+    const price = filterProductPrice(prices, currencyType);
+
+    updateTotalPrice(price.amount);
+  };
 
   incrementItem = () => {
-    const { addItemToTheCart, id } = this.props;
+    const { addItemToTheCart, id, prices, currencyType, updateTotalPrice } =
+      this.props;
+
+    const price = filterProductPrice(prices, currencyType);
 
     this.setState(
       (prevState) => ({
         itemCounter: prevState.itemCounter + 1,
       }),
-      () => addItemToTheCart({ id: id })
+      () => {
+        addItemToTheCart({ id: id });
+        updateTotalPrice(price.amount);
+      }
     );
   };
 
   decrementItem = () => {
-    const { removeItemFromTheCart, id } = this.props;
-    console.log(
-      "🚀 ~ file: CartItem.js ~ line 29 ~ CartItem ~ this.setState ~ itemCounter",
-      this.state.itemCounter
-    );
+    const { removeItemFromTheCart, id, prices, currencyType, updateTotalPrice } = this.props;
+    const price = filterProductPrice(prices, currencyType);
     this.setState(
       (prevState) => ({
         itemCounter: prevState.itemCounter > 0 ? prevState.itemCounter - 1 : 0,
       }),
-      () => removeItemFromTheCart({ counter: this.state.itemCounter, id: id })
+      () => {
+        removeItemFromTheCart({ counter: this.state.itemCounter, id: id });
+        updateTotalPrice(-price.amount);
+      }
     );
-    console.log(
-      "🚀 ~ file: CartItem.js ~ line 31 ~ CartItem ~ this.setState ~ itemCounter",
-      this.state.itemCounter
-    );
+
     // removeItemFromTheCart({ counter: this.state.itemCounter, id: id });
   };
 
   render() {
     const { itemCounter } = this.state;
-    const { brand, name, prices, gallery, attributes, currencyType } =
-      this.props;
+    const {
+      brand,
+      name,
+      prices,
+      gallery,
+      attributes,
+      currencyType,
+    
+    } = this.props;
     const price = filterProductPrice(prices, currencyType);
 
     return (
@@ -79,7 +96,6 @@ class CartItem extends Component {
                             attribute={item.value}
                             key={item.id}
                             isSelected={true}
-                      
                             incrementItem={this.incrementItem}
                             decrementItem={this.decrementItem}
                           />
@@ -89,7 +105,6 @@ class CartItem extends Component {
                           attribute={item.value}
                           key={item.id}
                           isSelected={false}
-                 
                           incrementItem={this.incrementItem}
                           decrementItem={this.decrementItem}
                         />
@@ -108,7 +123,6 @@ class CartItem extends Component {
                             colorCode={item.value}
                             key={item.id}
                             isSelected={true}
-                 
                             incrementItem={this.incrementItem}
                             decrementItem={this.decrementItem}
                           />
@@ -118,7 +132,6 @@ class CartItem extends Component {
                           colorCode={item.value}
                           key={item.id}
                           isSelected={false}
-                          
                           incrementItem={this.incrementItem}
                           decrementItem={this.decrementItem}
                         />

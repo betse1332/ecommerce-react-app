@@ -20,7 +20,8 @@ class Layout extends Component {
       cartItems,
       cartItemCount,
       removeItemFromTheCart,
-      addItemToTheCart
+      addItemToTheCart,
+      totalPrice
     } = this.props;
 
     const style = ({ isActive }) => ({
@@ -72,6 +73,7 @@ class Layout extends Component {
                   cartItemCount={cartItemCount}
                   removeItemFromTheCart={removeItemFromTheCart}
                   addItemToTheCart={addItemToTheCart}
+                  totalPrice={totalPrice}
                 />
               </div>
 
