@@ -21,7 +21,7 @@ class CartItem extends Component {
 
     updateTotalPrice(price.amount);
   };
-
+ 
   incrementItem = () => {
     const { addItemToTheCart, id, prices, currencyType, updateTotalPrice } =
       this.props;
@@ -40,7 +40,13 @@ class CartItem extends Component {
   };
 
   decrementItem = () => {
-    const { removeItemFromTheCart, id, prices, currencyType, updateTotalPrice } = this.props;
+    const {
+      removeItemFromTheCart,
+      id,
+      prices,
+      currencyType,
+      updateTotalPrice,
+    } = this.props;
     const price = filterProductPrice(prices, currencyType);
     this.setState(
       (prevState) => ({
@@ -64,13 +70,50 @@ class CartItem extends Component {
       gallery,
       attributes,
       currencyType,
-    
+      makeItOverlay,
     } = this.props;
     const price = filterProductPrice(prices, currencyType);
+    const cartInlineStyle = !makeItOverlay
+      ? {
+          width: "90rem",
+          height: "15rem",
+      
+          paddingTop:'1rem',
+         borderTop: "1px solid #eee",
 
+         
+
+          
+          // justifyContent: "flex-end",
+        }
+      : {};
+    const flexStyle = makeItOverlay
+      ? { flex: 3 }
+      : {
+          // flex:0
+        };
+    const counterInlineStyle = makeItOverlay
+      ? {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          paddingRight:'.5rem',
+          alignItems: "center",
+          flex: 1.5,
+
+          fontFamily: "Railway",
+          fontSize: "12px",
+        }
+      : {
+        display:'flex',
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems:'center',
+        paddingRight:'1rem',
+      };
     return (
-      <div className="cartitem">
-        <div className="cartitem--details">
+      <div className="cartitem" style={cartInlineStyle}>
+        <div className="cartitem--details" style={flexStyle}>
           <p className="cartitem--name">
             {name} {brand}
           </p>
@@ -143,18 +186,35 @@ class CartItem extends Component {
             }
           })}
         </div>
-        <div className="cartitem--counter">
-          <div className="counter--sign" onClick={this.incrementItem}>
-            +
+        <div
+          style={
+            makeItOverlay
+              ? {
+                  
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  flex: "3",
+                }
+              : {
+                
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }
+          }
+        >
+          <div style={counterInlineStyle}>
+            <div className="counter--sign" onClick={this.incrementItem}>
+              +
+            </div>
+            <p className="item--counter">{itemCounter}</p>
+            <div className="counter--sign" onClick={this.decrementItem}>
+              <img src={minus} alt="" className="minus--icon" />
+            </div>
           </div>
-          <p className="item--counter">{itemCounter}</p>
-          <div className="counter--sign" onClick={this.decrementItem}>
-            <img src={minus} alt="" className="minus--icon" />
-          </div>
-        </div>
 
-        <div className="cartitem--img">
-          <img src={gallery[0]} alt="cart item" className="cart--img" />
+          <div style={makeItOverlay ? { flexStyle } : { width: "30%" }}>
+            <img src={gallery[0]} alt="cart item" className="cart--img" />
+          </div>
         </div>
       </div>
     );

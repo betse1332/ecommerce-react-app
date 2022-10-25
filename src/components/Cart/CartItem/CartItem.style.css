@@ -4,6 +4,8 @@
   /* border: 1px solid; */
   padding-bottom: .5rem;
   margin-bottom: 1.5rem;
+  justify-content: space-between;
+  
 }
 .cartitem--sizelist {
   display: flex;
@@ -24,14 +26,11 @@
 .cartitem--price{
     font-weight: 500;
 }
-.cartitem--img {
-  flex: 3;
- 
-}
-.cartitem--details {
+
+/* .cartitem--details {
   flex: 3;
 
-}
+} */
 .title{
     /* border: 1px solid; */
     padding: 0;
@@ -68,10 +67,11 @@
 }
 .cart--img{
     
-    width: 100%;
-    text-align: center;
-   
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.7rem;
+  object-fit: contain;
+ 
 }
 .item--counter{
   font-family: 'Raleway';

@@ -7,13 +7,13 @@ import { filterProductPrice } from "../../helper-functions";
 class LayoutActions extends Component {
   constructor(props) {
     super(props);
-
+    this.wrapperRef = React.createRef();
     this.state = {
       isDropDownOpen: false,
       headerTitle: this.props.title,
       selectedItem: {},
       isCartModalOpened: false,
-      
+      cartItemPrices: 0,
     };
   }
 
@@ -33,8 +33,11 @@ class LayoutActions extends Component {
   //     this.state.totalPrice
   //   );
   // };
-
-
+  handleOutsideDropdownClicked=(event)=> {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.toggleDropDown()
+    }
+  }
   toggleCartModal = () => {
     this.setState((prevstate) => ({
       isCartModalOpened: !prevstate.isCartModalOpened,
@@ -55,10 +58,21 @@ class LayoutActions extends Component {
         selectedItem: item,
         headerTitle: item.symbol,
       },
-      () => selectedItem?.symbol !== item.symbol && handleSelector(item.symbol)
+      () => {
+        selectedItem?.symbol !== item.symbol && handleSelector(item.symbol);
+      
+       
+      }
     );
   };
+  componentDidMount=()=>{
+    document.addEventListener("mousedown", this.handleOutsideDropdownClicked);
+  }
+  componentWillUnmount=()=>{
+    document.removeEventListener("mousedown", this.handleOutsideDropdownClicked);
+  }
 
+  
   render() {
     const {
       currencies,
@@ -67,24 +81,19 @@ class LayoutActions extends Component {
       cartItemCount,
       removeItemFromTheCart,
       addItemToTheCart,
-      totalPrice
+      totalPrice,
     } = this.props;
     console.log(
       "🚀 ~ file: LayoutActions.js ~ line 43 ~ LayoutActions ~ render ~ cartItems",
       cartItems
     );
 
-    const {
-      isDropDownOpen,
-      headerTitle,
-      isCartModalOpened,
-     
-      
-    } = this.state;
+    const { isDropDownOpen, headerTitle, isCartModalOpened, cartItemPrices } =
+      this.state;
     return (
       <div className="layout--actions">
         <div className="action--items">
-          <div className="currency--dropdown">
+          <div className="currency--dropdown" ref={this.wrapperRef}> 
             <button className="dropdown--header" onClick={this.toggleDropDown}>
               <div
                 className="header--title"
@@ -132,8 +141,9 @@ class LayoutActions extends Component {
             removeItemFromTheCart={removeItemFromTheCart}
             addItemToTheCart={addItemToTheCart}
             cartItemCount={cartItemCount}
-           
-            totalPrice={totalPrice}
+            toggleCartModal={this.toggleCartModal}
+         
+            makeItOverlay={true}
           />
         )}
       </div>

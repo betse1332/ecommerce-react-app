@@ -16,9 +16,6 @@ class App extends Component {
   };
 
   addItemToTheCart = (product) => {
-    
-  
-
     const itemExist = this.state.cartItems.filter(
       (item) => product.id === item.id
     ).length;
@@ -26,31 +23,26 @@ class App extends Component {
     itemExist
       ? this.setState((prevState) => ({
           cartItemCount: prevState.cartItemCount + 1,
-        
         }))
       : this.setState((prevstate) => ({
           cartItemCount: prevstate.cartItemCount + 1,
           cartItems: [...prevstate.cartItems, product],
-         
         }));
-
   };
 
   removeItemFromTheCart = (product) => {
-    const { cartItems,currencyType } = this.state;
+    const { cartItems, currencyType } = this.state;
 
     const { counter, id } = product;
     const newCartItems = cartItems.filter((item) => item.id !== id);
-   
+
     counter == 0
       ? this.setState((prevState) => ({
           cartItems: newCartItems,
           cartItemCount: prevState.cartItemCount - 1,
-        
         }))
       : this.setState((prevState) => ({
           cartItemCount: prevState.cartItemCount - 1,
-      
         }));
 
     console.log(this.state.cartItems.length);
@@ -69,7 +61,7 @@ class App extends Component {
   };
 
   render() {
-    const { cartItems, currencyType, cartItemCount,totalPrice } = this.state;
+    const { cartItems, currencyType, cartItemCount, totalPrice } = this.state;
     console.log(
       "🚀 ~ file: App.js ~ line 38 ~ App ~ render ~ cartItems",
       cartItems
@@ -137,12 +129,15 @@ class App extends Component {
               path="cart"
               element={
                 <Cart
-                 
+                   currencyType={currencyType}
+                  cartItems={cartItems}
+                  cartItemCount={cartItemCount}
+                  removeItemFromTheCart={this.removeItemFromTheCart}
+                  addItemToTheCart={this.addItemToTheCart}
                 />
               }
             />
           </Route>
-          
         </Routes>
       </div>
     );
