@@ -35,7 +35,9 @@ class LayoutActions extends Component {
   // };
   handleOutsideDropdownClicked=(event)=> {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-      this.toggleDropDown()
+      if(this.state.isDropDownOpen){
+        this.toggleDropDown()
+      }
     }
   }
   toggleCartModal = () => {

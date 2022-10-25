@@ -1,0 +1,58 @@
+.product--detail{
+    display: flex;
+    justify-content: center;
+    padding:2rem 1rem;
+ 
+   
+}
+.product--gallery{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 10%;
+    gap: 10px;
+   
+  
+}
+
+.product--image{
+    flex:1;
+    padding-left: 2rem;
+    
+    
+
+    
+}
+.productdetail--description{
+    flex:1;
+ 
+
+}
+.cover--image{
+    width: 70%;
+}
+.gallery--image{
+    object-fit:contain;
+ 
+    width: 15rem;
+    height: 10rem;
+}
+.productdetail--name{
+    font-size: 30px;
+    font-weight: 600;
+
+    margin:0px
+  
+}
+
+.productdetail--brand{
+    font-size: 25px;
+
+    margin-top: .5rem;
+}
+
+.productdetail--color{
+    width: 120%;
+
+}

@@ -1,28 +1,23 @@
 import gql from "graphql-tag";
 
-export const GET_PRODUCT_BY_ID = gql`
+export const GET_PRODUCT_DETAIL_BY_ID = gql`
   query ($productID: String!) {
     product(id: $productID) {
-      id
-      gallery
+      attributes {
+        id
+        name
+        type
+      }
       brand
+      description
+      gallery
+      id
       name
       prices {
         amount
         currency {
           label
           symbol
-        }
-      }
-      attributes {
-        id
-        name
-
-        type
-        items {
-          displayValue
-          id
-          value
         }
       }
     }

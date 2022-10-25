@@ -26,15 +26,16 @@ class ProductColorBox extends Component {
     );
   };
   render() {
-    const { colorCode } = this.props;
+    const { colorCode,isDetail } = this.props;
     const { isSelected } = this.state;
     const style = {
       backgroundColor: colorCode,
-      width: "1.7rem",
-      height: "1.5rem",
+      width: !isDetail ?"1.7rem" :'2.5rem',
+      height:!isDetail ?"1.5rem" :'2.4rem',
       border: isSelected ? "3px solid #5ECE7B" : "none",
     };
 
+    
     return (
       <div
         style={style}

@@ -30,11 +30,16 @@ class ProductAttributeBox extends Component {
   };
 
   render() {
+    const { attribute,isDetail } = this.props;
     const style = {
       backgroundColor: "black",
       color: "white",
+      width: isDetail ?"4rem" :'20%',
+     
+      padding:isDetail?'.8rem 0':'0 .2rem'
+      
     };
-    const { attribute } = this.props;
+   
     const { isSelected } = this.state;
     console.log(
       "🚀 ~ file: ProductAttributeBox.js ~ line 8 ~ ProductAttributeBox ~ render ~ attribute",
@@ -44,7 +49,7 @@ class ProductAttributeBox extends Component {
     return (
       <div
         className="product--attribute"
-        style={isSelected ? style : {}}
+        style={isSelected ? style : { width: isDetail ?"4rem" :'20%',padding:isDetail?'.8rem 0':''}}
         onClick={this.handleOnAttributeClicked}
       >
         <p className="attribute--component">{attribute}</p>

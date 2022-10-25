@@ -141,6 +141,7 @@ class CartItem extends Component {
                             isSelected={true}
                             incrementItem={this.incrementItem}
                             decrementItem={this.decrementItem}
+                            isDetail={false}
                           />
                         );
                       return (
@@ -150,6 +151,7 @@ class CartItem extends Component {
                           isSelected={false}
                           incrementItem={this.incrementItem}
                           decrementItem={this.decrementItem}
+                          isDetail={false}
                         />
                       );
                     })}
@@ -166,6 +168,7 @@ class CartItem extends Component {
                             colorCode={item.value}
                             key={item.id}
                             isSelected={true}
+                            isDetail={false}
                             incrementItem={this.incrementItem}
                             decrementItem={this.decrementItem}
                           />
@@ -174,6 +177,7 @@ class CartItem extends Component {
                         <ProductColorBox
                           colorCode={item.value}
                           key={item.id}
+                          isDetail={false}
                           isSelected={false}
                           incrementItem={this.incrementItem}
                           decrementItem={this.decrementItem}
@@ -184,7 +188,8 @@ class CartItem extends Component {
                 </div>
               );
             }
-          })}
+          }
+          )}
         </div>
         <div
           style={

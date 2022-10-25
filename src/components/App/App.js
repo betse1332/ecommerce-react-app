@@ -3,7 +3,7 @@ import Layout from "../Layout";
 import { Route, Routes } from "react-router-dom";
 import Category from "../Category";
 import { filterProductPrice } from "../helper-functions";
-
+import ProductDetail from "../Product/ProductDetail";
 import "./App.style.css";
 import Cart from "../Cart/Cart";
 class App extends Component {
@@ -53,8 +53,6 @@ class App extends Component {
     });
   };
   handleSelectorChange = (currency) => {
-    console.log("🚀 ~ file: App.js ~ line 22 ~ App ~ currency", currency);
-
     this.setState({
       currencyType: currency,
     });
@@ -62,10 +60,6 @@ class App extends Component {
 
   render() {
     const { cartItems, currencyType, cartItemCount, totalPrice } = this.state;
-    console.log(
-      "🚀 ~ file: App.js ~ line 38 ~ App ~ render ~ cartItems",
-      cartItems
-    );
 
     return (
       <div className="app">
@@ -129,11 +123,21 @@ class App extends Component {
               path="cart"
               element={
                 <Cart
-                   currencyType={currencyType}
+                  currencyType={currencyType}
                   cartItems={cartItems}
                   cartItemCount={cartItemCount}
                   removeItemFromTheCart={this.removeItemFromTheCart}
                   addItemToTheCart={this.addItemToTheCart}
+                />
+              }
+            />
+
+            <Route
+              path="products/:productID"
+              element={
+                <ProductDetail
+                  addItemToTheCart={this.addItemToTheCart}
+                  removeItemFromTheCart={this.removeItemFromTheCart}
                 />
               }
             />

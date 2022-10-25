@@ -184,7 +184,7 @@ class CartOverlay extends Component {
                 </div>
               ) : (
                 <div>
-                  <button className="action--close">CLOSE</button>{" "}
+                  <button className="action--close" onClick={this.props.toggleCartModal}>CLOSE</button>{" "}
                 </div>
               )}
             </div>

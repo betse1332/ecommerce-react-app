@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CartOverlay from "./CartOverlay";
 import './cart.style.css'
-import { filterProductPrice } from "../helper-functions";
+
 class Cart extends Component {
 
   constructor(props){
