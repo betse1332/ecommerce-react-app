@@ -10,28 +10,28 @@
   height: 20px;
   align-self: center;
   margin-right: 0.6rem;
-  
-  margin-top: .3rem;
+
+  margin-top: 0.3rem;
 }
-.cart--base{
+.cart--base {
   align-self: center;
   margin-right: 0.6rem;
-  
-  margin-top: .3rem;
+
+  margin-top: 0.3rem;
   height: 20px;
   width: 20px;
   /* border:1px solid  transparent; */
   /* border-radius: 50%; */
-  background-image: url('../../../assets/empty-cart.png');
+  background-image: url("../../../assets/empty-cart.png");
   background-size: cover;
   background-position: left;
-  position: relative;  
+  position: relative;
 }
-.cart--indicator{
+.cart--indicator {
   position: absolute;
   width: 1rem;
   height: 1rem;
-  top:-45%;
+  top: -45%;
   right: 0%;
   left: 60%;
   bottom: 60%;
@@ -41,57 +41,56 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
-
 }
-.notification--count{
-  font-family: 'Raleway';
+.notification--count {
+  font-family: "Raleway";
   color: white;
   font-weight: 500;
 }
-
 
 .action--items {
   display: flex;
 }
 .currency--dropdown {
-    margin-top: 0.4rem;
-  }
-  .dropdown--list {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.5rem;
-  
-    width: 100%;
-    padding: 0.3rem 0.9rem;
-    
-    box-shadow: rgba(214, 214, 214, 0.25) 0px 6px 12px -2px, rgba(214, 214, 214, 0.25) 0px 3px 7px -3px;
-  }
-  .dropdown--header {
-    border: none;
-  
-    background-color: transparent;
-    margin-left: 2.3rem;
-    font-size: 18px;
-    font-family: "Raleway";
-    font-weight: 400;
-  }
-  
-  .dropdown--listitem {
-    border: none;
-    width: 130%;
-    padding: 0.5rem 0;
-    align-self: center;
-    background-color: transparent;
-    font-family: "Raleway";
-    font-weight: 400;
-    font-size: 18px;
-  }
-  .dropdown--listitem:hover {
-    background-color: #eeeeee;
-  }
-  
-  .dropdown--arrowup {
-    margin-left: 0.4rem;
-  }
-  
+  margin-top: 0.4rem;
+  /* margin-right:220px ; */
+  position: relative;
+}
+.dropdown--list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+
+  width: 100%;
+  padding: 0.3rem 0.9rem;
+
+  box-shadow: rgba(214, 214, 214, 0.25) 0px 6px 12px -2px,
+    rgba(214, 214, 214, 0.25) 0px 3px 7px -3px;
+}
+.dropdown--header {
+  border: none;
+
+  background-color: transparent;
+  margin-left: 2.3rem;
+  font-size: 18px;
+  font-family: "Raleway";
+  font-weight: 400;
+}
+
+.dropdown--listitem {
+  border: none;
+  width: 130%;
+  padding: 0.5rem 0;
+  align-self: center;
+  background-color: transparent;
+  font-family: "Raleway";
+  font-weight: 400;
+  font-size: 18px;
+}
+.dropdown--listitem:hover {
+  background-color: #eeeeee;
+}
+
+.dropdown--arrowup {
+  margin-left: 0.4rem;
+}

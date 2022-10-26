@@ -6,7 +6,13 @@ export const GET_PRODUCT_DETAIL_BY_ID = gql`
       attributes {
         id
         name
+
         type
+        items {
+          displayValue
+          id
+          value
+        }
       }
       brand
       description

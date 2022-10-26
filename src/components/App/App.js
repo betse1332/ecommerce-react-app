@@ -19,7 +19,7 @@ class App extends Component {
     const itemExist = this.state.cartItems.filter(
       (item) => product.id === item.id
     ).length;
-
+    if(itemExist&& product.name!=null)return;
     itemExist
       ? this.setState((prevState) => ({
           cartItemCount: prevState.cartItemCount + 1,
@@ -137,7 +137,8 @@ class App extends Component {
               element={
                 <ProductDetail
                   addItemToTheCart={this.addItemToTheCart}
-                  removeItemFromTheCart={this.removeItemFromTheCart}
+                  currencyType={this.state.currencyType}
+                
                 />
               }
             />

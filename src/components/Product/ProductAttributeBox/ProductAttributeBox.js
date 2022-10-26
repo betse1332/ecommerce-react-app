@@ -19,7 +19,7 @@ class ProductAttributeBox extends Component {
     });
   };
   handleOnAttributeClicked = () => {
-    const {  incrementItem, decrementItem } = this.props;
+    const {  incrementItem, decrementItem,isDetail } = this.props;
    
     this.setState(
       (prevstate) => ({
@@ -50,7 +50,7 @@ class ProductAttributeBox extends Component {
       <div
         className="product--attribute"
         style={isSelected ? style : { width: isDetail ?"4rem" :'20%',padding:isDetail?'.8rem 0':''}}
-        onClick={this.handleOnAttributeClicked}
+        onClick={!isDetail? this.handleOnAttributeClicked:()=>{}}
       >
         <p className="attribute--component">{attribute}</p>
       </div>

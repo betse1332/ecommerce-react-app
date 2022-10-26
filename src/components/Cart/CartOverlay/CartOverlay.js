@@ -17,15 +17,16 @@ class CartOverlay extends Component {
   }
 
   handleOutsideOverlayClicked=(event)=> {
+    const {toggleCartModal}=this.props;
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-      this.props.toggleCartModal()
+      toggleCartModal()
     }
   }
   updateTotalPrice = (price) => {
 
     this.setState((prevState) => ({
       
-      counterUpdateTotalPrice: prevState.counterUpdateTotalPrice + price,
+      totalPrice: prevState.totalPrice + price,
     }));
   };
 
@@ -36,15 +37,18 @@ class CartOverlay extends Component {
   }
   componentDidUpdate =()=>{
     const {cartItems,currencyType}= this.props;
-
+    
+    
     var totalPrice=0;
     cartItems.map(cart=>{
       const price =filterProductPrice(cart.prices,currencyType);
       totalPrice+=price.amount;
     });
-    totalPrice+=this.state.counterUpdateTotalPrice;
     
+    // totalPrice+=this.state.counterUpdateTotalPrice;
+    // this.state.counterUpdateTotalPrice=totalPrice;
     if(this.state.totalPrice != totalPrice ){
+      console.log("🚀 ~ file: CartOverlay.js ~ line 39 ~ CartOverlay ~ cartItems", totalPrice)
       this.setState({totalPrice:totalPrice});
     }
   
@@ -76,7 +80,7 @@ class CartOverlay extends Component {
       makeItOverlay,
     
     } = this.props;
-    const {totalPrice}=this.state;
+    const {totalPrice,counterUpdateTotalPrice}=this.state;
     const overlayStyle = makeItOverlay
       ? {
           position: "fixed",
@@ -92,7 +96,9 @@ class CartOverlay extends Component {
           justifyContent: "flex-end",
           paddingRight: "5rem",
         }
-      : {};
+      : {
+       
+      };
     const overlayContent = makeItOverlay
       ? {
           width: "20rem",
@@ -168,7 +174,7 @@ class CartOverlay extends Component {
                     <h4>Total</h4>
                     <h4>
                       {currencyType}
-                      {this.state.totalPrice}
+                      {totalPrice}
                     </h4>
                   </div>
                   <div className="footer--actions">

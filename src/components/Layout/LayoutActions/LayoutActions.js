@@ -17,22 +17,7 @@ class LayoutActions extends Component {
     };
   }
 
-  // updateTotalPrice = (priceUpdate) => {
-  //   const { currencyType } = this.props;
-  //   const { productPrices, actionType } = priceUpdate;
-  //   const price = filterProductPrice(productPrices, currencyType);
-  //   this.setState((prevState) => ({
-  //     totalPrice:
-  //       actionType === "INCREMENT"
-  //         ? prevState.totalPrice + price
-  //         : prevState.totalPrice - price,
-  //   }));
 
-  //   console.log(
-  //     "🚀 ~ file: LayoutActions.js ~ line 25 ~ LayoutActions ~ this.setState ~ totalPrice",
-  //     this.state.totalPrice
-  //   );
-  // };
   handleOutsideDropdownClicked=(event)=> {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
       if(this.state.isDropDownOpen){

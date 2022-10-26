@@ -40,7 +40,7 @@ class ProductColorBox extends Component {
       <div
         style={style}
         className="product--colorbox"
-        onClick={this.handleColorSelector}
+        onClick={!isDetail?this.handleColorSelector:()=>{}}
       ></div>
     );
   }

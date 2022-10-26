@@ -15,3 +15,9 @@ export const calculateTax = (totalPrice) => {
 
   return tax;
 };
+
+export const stringToHtml= (inputString)=>{
+  var parser = new DOMParser();
+	var doc = parser.parseFromString(inputString, 'text/html');
+	return doc.body;
+}

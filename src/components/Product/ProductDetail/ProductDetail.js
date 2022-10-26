@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { useParams } from "react-router-dom";
-import { GET_PRODUCT_BY_ID } from "../queries";
+import { GET_PRODUCT_DETAIL_BY_ID } from "./queries";
 import ProgressIndicator from "../../ProgressIndicator";
 import ErrorMessage from "../../Error";
 import "./ProductDetails.style.css";
 import ProductAttributeBox from "../ProductAttributeBox";
 import ProductColorBox from "../ProductColorBox";
+import { filterProductPrice, stringToHtml } from "../../helper-functions";
+
 function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
+
 }
 
 class ProductDetail extends Component {
@@ -18,10 +21,10 @@ class ProductDetail extends Component {
 
   render() {
     const productID = this.props.params.productID;
-    const { removeItemFromTheCart,addItemToTheCart}=this.props;
+    const { addItemToTheCart,currencyType}=this.props;
     return (
       <div>
-        <Query query={GET_PRODUCT_BY_ID} variables={{ productID }}>
+        <Query query={GET_PRODUCT_DETAIL_BY_ID} variables={{ productID }}>
           {({ data, loading, error }) => {
             if (loading) {
               return <ProgressIndicator />;
@@ -32,9 +35,10 @@ class ProductDetail extends Component {
             const { product } = data;
             const { gallery } = product;
             const {attributes}=product;
+            const price = filterProductPrice(product.prices, currencyType);
             console.log(
               "🚀 ~ file: ProductDetail.js ~ line 31 ~ ProductDetail ~ render ~ product",
-              product.id
+              product
             );
             return (
               <div className="product--detail">
@@ -68,7 +72,7 @@ class ProductDetail extends Component {
                     {
                       return attribute.id !== "Color" ? (
                         <div className="cartitem--size" key={attribute.id}>
-                          <p className="title">{attribute.name} :</p>
+                          <p className="title">{attribute.name.toUpperCase()} :</p>
                           <div className="cartitem--sizelist">
                             {attribute.items.map((item) => {
                               if (attribute.items.indexOf(item) == 0)
@@ -97,7 +101,7 @@ class ProductDetail extends Component {
                         </div>
                       ) : (
                         <div className="cartitem--color" key={attribute.id}>
-                          <p className="title">{attribute.name}:</p>
+                          <p className="title">{attribute.name.toUpperCase()}:</p>
                           <div className="cartitem--colorlist">
                             {attribute.items.map((item) => {
                               if (attribute.items.indexOf(item) == 0)
@@ -113,7 +117,7 @@ class ProductDetail extends Component {
                                     decrementItem={()=>{}}
                                   />
                                 );
-                              return (
+                              return (  
                                 <ProductColorBox
                                   colorCode={item.value}
                                   id={item.id}
@@ -130,6 +134,12 @@ class ProductDetail extends Component {
                       );
                     }
                   })}
+                   <p className="title">PRICE:</p>
+                   <p className="product--price"> {currencyType}{price.amount}</p>
+                   <button className="product--add" onClick={()=>addItemToTheCart(product)}>ADD TO CART</button>
+                   <div className="product--description" dangerouslySetInnerHTML={{__html:`${product.description}`}}/>
+                    
+                 
                 </div>
               </div>
             );
